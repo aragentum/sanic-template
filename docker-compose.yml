@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+
+  st-db:
+    container_name: st-db
+    image: postgres:10.7
+    restart: always
+    environment:
+      - POSTGRES_USER=st
+      - POSTGRES_PASSWORD=st123
+      - POSTGRES_DB=st
+    command: ["--autovacuum=off"]
+    ports:
+      - "127.0.0.40:5432:5432"

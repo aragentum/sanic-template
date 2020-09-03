@@ -1,0 +1,4 @@
+sanic==20.6.3
+alembic==1.4.2
+gino==1.0.1
+psycopg2-binary==2.8.5
