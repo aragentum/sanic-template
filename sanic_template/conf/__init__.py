@@ -1,12 +1,12 @@
 import importlib
-import logging
 import os
 
-SETTINGS_MODULE_PATH: str = "SANIC_TEMPLATE_SETTINGS_MODULE"
+from loguru import logger
+
+SETTINGS_MODULE_PATH: str = "SANIC_SETTINGS_MODULE"
 
 
 class StandardSetting:
-    logger = logging.getLogger(__name__)
 
     def __init__(self) -> None:
         settings_module_path = os.environ.get(SETTINGS_MODULE_PATH, "sanic_template.settings.development")
@@ -19,6 +19,9 @@ class StandardSetting:
         """Return the value from extension settings, cache or module settings."""
         return self.__dict__.get(name)
 
+    def __setattr__(self, name: str, value) -> None:
+        self.__dict__[name] = value
+
     def get_config(self) -> dict:
         return self.settings
 
@@ -27,6 +30,7 @@ class StandardSetting:
         for setting in dir(mod):
             if setting.isupper():
                 setattr(self, setting, getattr(mod, setting))
+        logger.info("Settings from module loaded")
 
 
 settings = StandardSetting()

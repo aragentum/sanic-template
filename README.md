@@ -2,26 +2,45 @@
 This is simple template project on Sanic + Gino + Alembic.
 
 ## Run
+To run in dev mode:
 ```
-python -m sanic_template
+python manage.py runserver
+```
+
+To run in prod mode:
+```
+sanic sanic_template.runner.app --port 8000 --host 0.0.0.0 --workers 4
+```
+or
+```
+uvicorn sanic_template.runner:app ...
+```
+or
+```
+gunicorn sanic_template.runner:app --bind 0.0.0.0:8000 --worker-class sanic.worker.GunicornWorker
 ```
 
 ## Migrations
-In this project used database migration tool Alembic. This tool only works in sync mode, it required sync PostgreSQL driver - psycopg2.
-By default for Alembic database url `postgresql://...` means `postgresql+psycopg2://...` and for Gino by default it means `postgresql+asyncpg://`, for this reason, the same database url will be works for both Gino and Alembic. 
+In this project used database migration tool Alembic (https://alembic.sqlalchemy.org/en/latest/tutorial.html). This tool only works in sync mode, it required sync PostgreSQL driver - psycopg2.
+By default, for Alembic database url `postgresql://...` means `postgresql+psycopg2://...` and for Gino by default it means `postgresql+asyncpg://`, for this reason, the same database url will be works for both Gino and Alembic. 
+This project has some custom commands which simplifies the process interaction with database. 
 
-Some useful commands:
+To apply migrations:
 ```
-# display the current revision for a database
-alembic current
-```
-
-```
-# apply all migrations
-alembic upgrade head
+python manage.py migrate
 ```
 
+To generate new migration:
 ```
-# generate new migration
-alembic revision --autogenerate --rev-id "0001" -m "Create users table"
+python manage.py makemigrations <migration message>
+```
+
+To display the current revision for a database:
+```
+python manage.py current
+```
+
+To display history of migration:
+```
+python manage.py history
 ```

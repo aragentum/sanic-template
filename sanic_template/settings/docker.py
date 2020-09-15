@@ -4,7 +4,7 @@ DEBUG = True
 DB_ECHO = False
 
 # DATABASE
-PG_HOST = os.getenv('PG_HOST', '127.0.0.40')
+PG_HOST = os.getenv('PG_HOST', 'st-db')
 PG_PORT = os.getenv('PG_PORT', '5432')
 PG_USER = os.getenv('PG_USER', 'st')
 PG_PASSWORD = os.getenv('PG_PASSWORD', 'st123')

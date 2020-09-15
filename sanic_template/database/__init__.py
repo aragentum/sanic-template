@@ -1,8 +1,5 @@
-import logging
-
+from loguru import logger
 from sanic import Sanic
-
-logger = logging.getLogger(__name__)
 
 
 async def on_startup(app, loop):

@@ -1,15 +1,35 @@
 version: "3.7"
 
 services:
+  st-api:
+    container_name: st-api
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - IS_DEVELOPMENT=true
+      - SANIC_SETTINGS_MODULE=sanic_template.settings.docker
+    volumes:
+      - ./sanic_template:/usr/src/app/sanic_template
+    depends_on:
+      - st-db
+    networks:
+      st-net:
+    ports:
+      - "127.0.0.45:8000:8000"
 
   st-db:
     container_name: st-db
     image: postgres:10.7
-    restart: always
     environment:
       - POSTGRES_USER=st
       - POSTGRES_PASSWORD=st123
       - POSTGRES_DB=st
     command: ["--autovacuum=off"]
+    networks:
+      st-net:
     ports:
       - "127.0.0.40:5432:5432"
+
+networks:
+  st-net:

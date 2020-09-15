@@ -1,8 +1,15 @@
 import os
 import logging.config
 
+DEBUG = True
+DB_ECHO = True
+
 # BASE
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# ALEMBIC
+ALEMBIC_CONFIG_PATH = os.getenv('ALEMBIC_CONFIG_PATH', os.path.join(os.path.dirname(BASE_DIR), 'alembic.ini'))
+ALEMBIC_MIGRATIONS_PATH = os.getenv('ALEMBIC_MIGRATIONS_PATH', os.path.join(os.path.dirname(BASE_DIR), 'migrations'))
 
 # LOGGING
 LOGGING_CONFIG = {
@@ -19,23 +26,6 @@ LOGGING_CONFIG = {
             'class': 'logging.StreamHandler',
             'formatter': 'console_formatter'
         }
-    },
-    'loggers': {
-        '': {
-            'level': 'INFO',
-            'handlers': ['console']
-        },
-        'sanic': {
-            'level': 'INFO',
-            'handlers': ['console'],
-            'propagate': False
-        },
-        'sanic_template': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False
-        }
     }
 }
-
-logging.config.dictConfig(LOGGING_CONFIG)
+LOGGING_LEVEL = logging.DEBUG
