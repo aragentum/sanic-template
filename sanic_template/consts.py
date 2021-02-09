@@ -1,0 +1,4 @@
+# DATE FORMAT
+
+BASE_DATE_FORMAT = '%Y-%m-%d'
+BASE_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'

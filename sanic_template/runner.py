@@ -1,8 +1,8 @@
 from sanic import Sanic
 
-from sanic_template import database, view
+from sanic_template import database, api, error
 from sanic_template.conf import settings
-from sanic_template.database.model.user import User
+
 from sanic_template.other import logging
 
 app = Sanic("sanic_app", log_config=settings.LOGGING_CONFIG)
@@ -11,14 +11,14 @@ app.config.from_object(settings)
 # init
 logging.setup()
 database.setup(app)
-view.setup(app)
+api.setup(app)
+error.setup(app)
 
 
 @app.listener("after_server_start")
 async def create_initial_data(app, loop):
-    await User.create(first_name="Roman",
-                      last_name="Averchenkov",
-                      username="aragentum")
+    from sanic_template.database.repo.user_repo import user_repo
+    await user_repo.create_or_update("aragentum", "Roman", "Averchenkov")
 
 
 def run():

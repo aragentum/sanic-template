@@ -7,3 +7,4 @@ click==7.1.2
 schematics==2.1.0
 pytest-sanic==1.6.1
 sqlalchemy_utils==0.36.8
+sanic-openapi==0.6.2
