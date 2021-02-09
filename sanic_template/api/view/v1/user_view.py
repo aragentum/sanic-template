@@ -7,7 +7,7 @@ from sanic_template.service.core.user_service import user_service
 user_bp = Blueprint('Users', url_prefix="/users")
 
 
-@user_bp.route("/users")
+@user_bp.route("/")
 @doc.summary("Returns list of users")
 async def users(request):
     # good place for run validator
