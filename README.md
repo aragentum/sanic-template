@@ -44,3 +44,7 @@ To display history of migration:
 ```
 python manage.py history
 ```
+
+## Documentation
+This project has Swagger UI by next url `host:port/swagger/` and OpenAPI 2.0 spec at `host:port/swagger/swagger.json`.
+OpenAPI urls is only available if your configuration has `DEBUG=True`.

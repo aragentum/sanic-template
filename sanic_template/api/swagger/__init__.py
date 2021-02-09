@@ -3,4 +3,5 @@ from sanic_openapi import swagger_blueprint
 
 
 def setup(app: Sanic):
-    app.blueprint(swagger_blueprint)
+    if app.config.DEBUG:
+        app.blueprint(swagger_blueprint)
